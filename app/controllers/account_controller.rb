@@ -7,7 +7,7 @@ class AccountController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    if @user.save
+    if @user.valid?(:password_setup) && @user.save
       #here applying the mailer method
       UserWelcomeMailer.with(user: @user).welcome_user.deliver_now
       redirect_to login_path
@@ -19,7 +19,6 @@ class AccountController < ApplicationController
   def login
     if request.post?
       user = User.find_by_email(params[:email])
-      puts "user #{user.email}, password : #{params[:password]} and input hash is #{User.encrypt(params[:password])}hash is #{user.hashed_password}"
       if user && User.encrypt(params[:password]) == user.hashed_password
         session[:user_id] = user.id
         redirect_to home_path

@@ -6,12 +6,8 @@ class ProfileController < ApplicationController
   end
 
   def update_profile
-    # data = params.require(:user).permit(:name, :dob, :mobile)
-    if @user.update(
-      :name => params[:user][:name],
-      :dob => params[:user][:dob],
-      :mobile => params[:user][:mobile],
-    )
+    user_params = params.require(:user).permit(:name, :dob, :mobile, :profile_image)
+    if @user.update(user_params)
       redirect_to home_path, notice: 'Profile has been updated!'
     else
       render :edit_profile

@@ -11,6 +11,10 @@
       </ul>
     <% end %>
   </div>
+  <div class="mb-3">
+    <%= form.label 'Profile Image',class:'form-label' %>
+    <%= form.file_field :profile_image,class:'form-control' %>
+  </div>
   <div class='form-group'>
     <%= form.label 'Name' %>
     <%= form.text_field :name, class:'form-control'%>
