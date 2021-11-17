@@ -1,0 +1,15 @@
+<p><%= notice %></p>
+<%= form_with(local:true) do |form| %>
+  <div class='errors'>
+    <p style="color:red;"><%= alert %></p>
+  </div>
+  <div class='form-group'>
+    <%= form.text_field :email, class:'form-control',placeholder:'Email' %>
+  </div>
+  <div class='form-group'>
+    <%= form.password_field :password, class:'form-control',placeholder:'Password' %>
+  </div>
+  <%= form.submit 'Signup', class:'btn btn-primary'%>
+<% end %>
+
+<%= link_to 'Forget Password?', forget_password_path %>
