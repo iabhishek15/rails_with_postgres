@@ -1,7 +1,8 @@
 <p style="color:green;"><%= notice %></p>
 <h1>This is a homepage!</h1>
 
-<% if current_user.profile_image.attached? %>
+
+<% if current_user && current_user.profile_image.attached? %>
   <%= image_tag current_user.profile_image,class:'profile-img' %>
 <% end %>
 

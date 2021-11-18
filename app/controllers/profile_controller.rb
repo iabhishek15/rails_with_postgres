@@ -16,6 +16,10 @@ class ProfileController < ApplicationController
 
 
   def set_user
-    @user = User.find(session[:user_id])
+    if current_user
+      @user = User.find(session[:user_id])
+    else
+      redirect_to login_path
+    end
   end
 end

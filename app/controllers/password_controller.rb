@@ -12,7 +12,7 @@ class PasswordController < ApplicationController
 			user = User.find_by_email(params[:email])
       if user
         new_password = random_password
-        UserResetPasswordMailer.with(user: user, password: new_password).reset_password.deliver_later
+        UserResetPasswordMailer.with(user: user, password: new_password).reset_password.deliver_now
         if user.update(:password => new_password)
           redirect_to login_path, notice: "reset link has been send!"
         else
@@ -29,16 +29,13 @@ class PasswordController < ApplicationController
   def reset_password
     @user = current_user
     if request.post?
-      #somehow this validation is not working
-      #letting the validation to run for specific case
       user_params = params.require(:user).permit(:password, :password_confirmation)
-      if @user.valid?(:password_setup) && @user.update(user_params)
+      puts "@user.valid?(:password_setup) => #{@user.valid?(:password_setup)}"
+      if @user.update(user_params) && @user.valid?(:password_setup)
         redirect_to home_path, notice: 'password has been updated'
       else
         render :reset_password
       end
     end
   end
-
-
 end

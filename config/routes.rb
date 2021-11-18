@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'account/logout', as:'logout'
   delete 'account/delete', as:'delete_account'
   get 'profile/edit_profile', as:"edit_profile"
-  patch 'profile/edit_profile', to:'profile#update_profile', as:"update_profile"
+  post 'profile/edit_profile', to:'profile#update_profile', as:"update_profile"
   get 'password/forget_password', as:'forget_password'
   post 'password/forget_password', as:'forget_password_post'
   get 'password/reset_password', as:'reset_password'
