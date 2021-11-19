@@ -7,7 +7,7 @@ class AccountController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    if @user.valid?(:password_setup) && @user.save
+    if @user.save
       #here applying the mailer method
       UserWelcomeMailer.with(user: @user).welcome_user.deliver_now
       redirect_to login_path

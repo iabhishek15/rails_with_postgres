@@ -11,6 +11,6 @@ Rails.application.routes.draw do
   get 'password/forget_password', as:'forget_password'
   post 'password/forget_password', as:'forget_password_post'
   get 'password/reset_password', as:'reset_password'
-  post 'password/reset_password', as:'reset_password_post'
+  patch 'password/reset_password', to:'password#reset_password_patch', as:'reset_password_patch'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

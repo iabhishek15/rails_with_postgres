@@ -12,14 +12,27 @@
   </head>
 
   <body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <%= link_to 'Home', home_path, class:'navbar-brand'%>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <% if current_user %>
+          <li class="nav-item active"><%= link_to "#{current_user.name}", edit_profile_path,class:'nav-link' %></li>
+          <li class="nav-item active"><%= link_to 'Reset Password', reset_password_path,class:'nav-link' %></li>
+          <li class="nav-item active"><%= link_to 'logout', logout_path,class:'nav-link' %></li>
+        <% else %>
+          <li class="nav-item active"><%= link_to 'singup', signup_path,class:'nav-link' %></li>
+          <li class="nav-item active"><%= link_to 'login',  login_path,class:'nav-link' %></li>
+          <li class="nav-item active"><%= link_to 'Forgot Password', forget_password_path,class:'nav-link' %></li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
 <div class = 'container'>
-  <% if current_user %>
-    <%= link_to "#{current_user.name}", edit_profile_path %>
-    <%= link_to 'logout', logout_path %>
-  <% else %>
-    <%= link_to 'singup', signup_path %>
-    <%= link_to 'login',  login_path %>
-  <% end %>
   <div class='container mt-5'>
     <%= yield %>
   </div>

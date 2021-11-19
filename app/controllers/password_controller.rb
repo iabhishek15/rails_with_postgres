@@ -1,4 +1,5 @@
 class PasswordController < ApplicationController
+  before_action :set_user
 
   def random_password
     (0...8).map{65.+(rand(25)).chr}.join
@@ -27,15 +28,20 @@ class PasswordController < ApplicationController
   end
 
   def reset_password
-    @user = current_user
-    if request.post?
-      user_params = params.require(:user).permit(:password, :password_confirmation)
-      puts "@user.valid?(:password_setup) => #{@user.valid?(:password_setup)}"
-      if @user.update(user_params) && @user.valid?(:password_setup)
-        redirect_to home_path, notice: 'password has been updated'
-      else
-        render :reset_password
-      end
+
+  end
+
+  def reset_password_patch
+    user_params = params.require(:user).permit(:password, :password_confirmation, :email)
+
+    if @user.update(user_params)
+      redirect_to home_path, notice: 'password has been updated'
+    else
+      render :reset_password
     end
+  end
+
+  def set_user
+    @user = current_user
   end
 end

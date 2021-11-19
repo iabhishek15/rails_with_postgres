@@ -3,7 +3,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
-  validates :password ,presence: true,confirmation: true, length: {in: 4..20}, on: :password_setup
+  validates :password ,presence: true,confirmation: true, length: {in: 4..20},  :if => :password_validation_required?
   validate :acceptable_image
 
   attr_accessor :password
@@ -11,6 +11,10 @@ class User < ApplicationRecord
   validates_with UserValidate
 
   def acceptable_image
+  end
+
+  def password_validation_required?
+    hashed_password.blank? || !password.blank?
   end
 
   # def acceptable_image
