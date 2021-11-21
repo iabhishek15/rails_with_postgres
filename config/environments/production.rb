@@ -92,5 +92,25 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.action_mailer.default_url_options = { :host => 'app_with_pgs.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'aqueous-sands-45740.herokuapp.com', protocol: "https" }
+  
+
+  #******************mailer in action below
+
+  # Don't care if the mailer can't send.
+  config.action_mailer.raise_delivery_errors = false
+
+  config.action_mailer.perform_caching = false
+  
+  #for devise mailer
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :port           => 587,
+    :address        => 'smtp.gmail.com',
+    :user_name      => 'donotreplyonlytesting@gmail.com',
+    :password       =>  'qvyetsdpljpvvmig',
+    :domain         => 'mail.google.com',
+    :authentication => :login,
+    :enable_starttls_auto => true
+  }
 end
